@@ -1,3 +1,1 @@
 # HBnB Clone
-
-vscode test
