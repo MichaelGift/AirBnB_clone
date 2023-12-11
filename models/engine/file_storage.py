@@ -30,7 +30,7 @@ class FileStorage:
         Saves all elements in __objects to the path in __file_path
         """
         with (open(FileStorage.__file_path,
-                encoding="utf-8", mode='w') as save_file):
+                   encoding="utf-8", mode='w') as save_file):
             saves = {key: value.to_dict()
                      for key, value, in FileStorage.__objects.items()}
             json.dump(saves, save_file)
