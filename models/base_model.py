@@ -29,4 +29,8 @@ class BaseModel:
     def __str__(self):
         """Return the string representation of the BaseModel instance"""
         class_name = self.__class__.__name__
-        return f"[{class_name}] ({self.id}) {self.__dict__}"
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__,
+            self.id,
+            self.__dict__
+        )
