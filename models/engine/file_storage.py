@@ -29,7 +29,8 @@ class FileStorage:
         """
         Saves all elements in __objects to the path in __file_path
         """
-        with open(FileStorage.__file_path, encoding="utf-8", mode='w') as save_file:
+        with open(
+                FileStorage.__file_path, encoding="utf-8", mode='w') as save_file:
             saves = {key: value.to_dict() for key, value, in FileStorage.__objects.items()}
             json.dump(saves, save_file)
 
@@ -38,7 +39,8 @@ class FileStorage:
         Loads all saved basemodel instances
         """
         try:
-            with open(FileStorage.__file_path, mode='r', encoding='utf-8') as save_file:
+            with open(
+                    FileStorage.__file_path, mode='r', encoding='utf-8') as save_file:
                 for key, value in (json.load(save_file)).items():
                     value = eval(value["__class__"])(**value)
                     self.__objects[key] = value
