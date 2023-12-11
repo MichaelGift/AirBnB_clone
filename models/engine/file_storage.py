@@ -37,7 +37,10 @@ class FileStorage:
         """
         Loads all saved basemodel instances
         """
-        with open(FileStorage.__file_path, mode='r', encoding='utf-8') as save_file:
-            for key, value in (json.load(save_file)).items():
-                value = eval(value["__class__"])(**value)
-                self.__objects[key] = value
+        try:
+            with open(FileStorage.__file_path, mode='r', encoding='utf-8') as save_file:
+                for key, value in (json.load(save_file)).items():
+                    value = eval(value["__class__"])(**value)
+                    self.__objects[key] = value
+        except FileNotFoundError:
+            pass
