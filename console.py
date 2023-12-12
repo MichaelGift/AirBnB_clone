@@ -75,7 +75,8 @@ class HBNBCommand(cmd.Cmd):
             parentheses_match = re.search(r"\((.*?)\)", suffix)
 
             if parentheses_match:
-                command = [suffix[:parentheses_match.span()[0]], parentheses_match.group()[1:-1]]
+                command = [suffix[:parentheses_match.span()[0]],
+                           parentheses_match.group()[1:-1]]
 
                 if command[0] in arg_dict:
                     call = "{} {}".format(prefix, command[1])
@@ -163,8 +164,9 @@ class HBNBCommand(cmd.Cmd):
         if class_name and class_name[0] not in HBNBCommand.__classes:
             print("** class doesn't exist **")
         else:
-            obj_list = [obj.__str__() for obj in storage.all().values() if
-                        not class_name or class_name[0] == obj.__class__.__name__]
+            obj_list = [obj.__str__() for obj in storage.all().values()
+                        if not class_name or
+                        class_name[0] == obj.__class__.__name__]
             print(obj_list)
 
     def do_count(self, arg):
@@ -195,7 +197,8 @@ class HBNBCommand(cmd.Cmd):
         if len(parsed_args) == 1:
             print("** instance id missing **")
             return False
-        if "{}.{}".format(parsed_args[0], parsed_args[1]) not in object_dict.keys():
+        if ("{}.{}".format(parsed_args[0], parsed_args[1])
+                not in object_dict.keys()):
             print("** no instance found **")
             return False
         if len(parsed_args) == 2:
