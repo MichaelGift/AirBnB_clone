@@ -29,20 +29,17 @@ class FileStorage:
         """
         Saves all elements in __objects to the path in __file_path
         """
-        with (open(FileStorage.__file_path,
-                   encoding="utf-8", mode='w') as save_file):
-            saves = {key: value.to_dict()
-                     for key, value, in FileStorage.__objects.items()}
-            json.dump(saves, save_file)
+        with open(FileStorage.__file_path, encoding='utf-8', mode='w') as file:
+            new_d = {k: v.to_dict() for k, v in FileStorage.__objects.items()}
+            json.dump(new_d, file)
 
     def reload(self):
         """
         Loads all saved basemodel instances
         """
         try:
-            with (open(FileStorage.__file_path, mode='r', encoding='utf-8')
-                  as save_file):
-                for key, value in (json.load(save_file)).items():
+            with open(FileStorage.__file_path, 'r', encoding='utf-8') as f:
+                for key, value in (json.load(f)).items():
                     value = eval(value["__class__"])(**value)
                     self.__objects[key] = value
         except FileNotFoundError:
